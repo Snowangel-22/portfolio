@@ -1,0 +1,57 @@
+/* Google Font: Merriweather */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+
+/* Global font */
+body {
+  font-family: 'Merriweather', serif;
+}
+
+/* Accent color */
+:root {
+  --accent: #3f0070;
+}
+
+/* Links */
+a,
+.nav-link span:hover,
+.project-card-link:hover .card-title {
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn.custom-btn,
+.custom-btn,
+.project-link,
+.back-link {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn.custom-btn:hover,
+.custom-btn:hover,
+.project-link:hover,
+.back-link:hover {
+  background: #5a00a6;
+  border-color: #5a00a6;
+}
+
+/* Tags / pills */
+.project-tag {
+  background: rgba(63, 0, 112, 0.1);
+  color: var(--accent);
+}
+
+/* Headings accents if needed */
+.page-header,
+.project-hero {
+  background: var(--accent) !important;
+}
+
+/* Color mode icon accent */
+.color-mode-icon.active:after,
+.color-mode-icon:after {
+  color: var(--accent);
+}
+
+
+
