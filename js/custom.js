@@ -11,13 +11,8 @@
     // HEADER
     $(".navbar").headroom();
 
-    // PROJECT CAROUSEL
-    $('.owl-carousel').owlCarousel({
-    	items: 1,
-	    loop:true,
-	    margin:10,
-	    nav:true
-	});
+    // Note: Project carousel initialization is handled by project-cards.js
+    // after cards are dynamically loaded
 
     // SMOOTHSCROLL
     $(function() {

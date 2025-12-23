@@ -53,5 +53,32 @@ a,
   color: var(--accent);
 }
 
+/* About image responsive sizing */
+.about-image {
+  width: 100%;
+  max-width: 100%;
+}
+
+.about-image img,
+.about-image svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* About text dynamic centering */
+.about-text {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .about-text {
+    text-align: left;
+  }
+}
+
 
 
