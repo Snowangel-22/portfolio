@@ -14,8 +14,9 @@
                         if (container) {
                             container.innerHTML = xhr.responseText;
                             
-                            // After navbar is loaded, set active state
+                            // After navbar is loaded, fix paths if in subdirectory and set active state
                             if (elementId === 'navbar-container') {
+                                fixNavbarPaths();
                                 setActiveNavItem();
                             }
                             resolve();
@@ -47,6 +48,22 @@
         });
     }
     
+    // Fix navbar paths when loaded from subdirectories
+    function fixNavbarPaths() {
+        const path = window.location.pathname;
+        const isInSubdirectory = path.includes('/projects/');
+        
+        if (isInSubdirectory) {
+            const navLinks = document.querySelectorAll('#navbar-container .nav-link, #navbar-container .navbar-brand');
+            navLinks.forEach(function(link) {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
+                    link.setAttribute('href', '../' + href);
+                }
+            });
+        }
+    }
+    
     // Determine current page from URL
     function getCurrentPage() {
         const path = window.location.pathname;
@@ -63,13 +80,20 @@
         return '';
     }
     
+    // Get the correct path to includes based on current page location
+    function getIncludePath(filename) {
+        const path = window.location.pathname;
+        const isInSubdirectory = path.includes('/projects/');
+        return isInSubdirectory ? '../' + filename : filename;
+    }
+    
     // Load includes immediately (runs synchronously in script order)
     function initIncludes() {
         // Load navbar first (most important)
-        loadInclude('navbar-container', 'includes/navbar.html')
+        loadInclude('navbar-container', getIncludePath('includes/navbar.html'))
             .then(function() {
                 // Then load footer
-                return loadInclude('footer-container', 'includes/footer.html');
+                return loadInclude('footer-container', getIncludePath('includes/footer.html'));
             })
             .then(function() {
                 // Dispatch custom event when includes are loaded

@@ -11,7 +11,7 @@ portfolio/
 ├── projects/                # Individual project detail pages
 │   ├── project-ecommerce.html
 │   ├── project-mobile.html
-│   └── project-analytics.html
+│   └── project-portfolio.html
 │
 ├── includes/                # Reusable HTML components
 │   ├── navbar.html          # Navigation bar (shared across all pages)

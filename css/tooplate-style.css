@@ -30,7 +30,11 @@ ul {
   margin: 0;
   padding: 0;
 }
-ul li {
+
+/* Navigation lists should not have bullets */
+.navbar-nav,
+.navbar-nav ul,
+.navbar-nav li {
   list-style: none;
 }
 
@@ -92,14 +96,14 @@ b, strong {
   transition: all 0.4s ease;
 }
 .custom-btn:hover {
-  color: #ffc200;
+  color: #10db02;
 }
 .custom-btn.custom-btn-bg {
   background: #474559;
   color: #ffffff;
 }
 .custom-btn.custom-btn-bg:hover {
-  background: #ffc200;
+  background: hsl(118, 95%, 48%);
   color: #ffffff !important;
 }
 
