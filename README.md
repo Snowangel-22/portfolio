@@ -2,6 +2,18 @@
 
 Hi! Thanks for visiting my portfolio website. For this project I used Cursor, ChatGPT, Claude, and Figma make to make my vision come true. Last updated 12/2025.
 
+Todo list 12/28/25
+- website icon + name
+- about page
+- add headshot
+- add proj photos
+- project - DOSS case study
+
+- project - Loreal brandstorm
+- project - Replo case study
+- fix dark mode
+- attach photos to experience
+
 ## 📁 Website Structure
 
 ```
