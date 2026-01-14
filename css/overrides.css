@@ -9,6 +9,7 @@ body {
 /* Accent color */
 :root {
   --accent: #3f0070;
+
 }
 
 /* Links */
@@ -80,5 +81,8 @@ a,
   }
 }
 
-
+.pdf-container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
 
