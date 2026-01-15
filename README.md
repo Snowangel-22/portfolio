@@ -2,13 +2,9 @@
 
 Hi! Thanks for visiting my portfolio website. For this project I used Cursor, ChatGPT, Claude, and Figma make to make my vision come true. Last updated 12/2025.
 
-Todo list 12/28/25
-- project - ERP startup case study
-- project - Loreal brandstorm
-   - fix PDF window size
-- project - ECommerce case study
+Todo list 01/14/2026
+- change proj cover to 2:3 ratio
 - website icon + name
-- add proj photos
 - fix dark mode
 - attach photos to experience
 
