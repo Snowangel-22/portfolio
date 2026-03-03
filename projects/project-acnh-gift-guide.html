@@ -39,7 +39,9 @@
                 <div class="row mt-5">
                   <div class="col-lg-12">
                       <div class="project-image">
-                          <img src="../images/project/project-acnh-gift-guide-cover.svg" alt="ACNH Gift Guide">
+                          <a href="https://acnh-gift-guide-tawny.vercel.app/" target="_blank" rel="noopener noreferrer">
+                              <img src="../images/project/project-acnh-gift-guide-cover.svg" alt="ACNH Gift Guide">
+                          </a>
                       </div>
                   </div>
               </div>
@@ -64,27 +66,20 @@
                     <p>
                         In Animal Crossing: New Horizons, gifting is one of the primary mechanics for raising friendship with villagers.
                         Each villager has two preferred clothing styles and two preferred colors, and the in-game catalog spans over 1,400 items.
-                        Finding the right gift means cross-referencing a wiki against your personal wardrobe — a tedious enough process
-                        that most players skip it entirely.
+                        When I gift villagers, often they will give something back that I do not want to keep. So instead of selling them,
+                        I want to gift them to another villager who will appreciate it (more than I do).
                     </p>
                     <p>
-                        ACNH Gift Guide removes that friction. Players build a personal clothing inventory and pin the villagers
-                        living on their island; the app instantly surfaces which items match each villager's preferences,
-                        turning a multi-step lookup into a single glance.
+                        I built this Gift Guide to remove that friction of not knowing who would like my gifts. I can log my clothing inventory, pin the villagers on my island,
+                        and the app instantly shows me which items I already own that match each villager's preferences.
+                        This replaces the multiple phone and computer tabs I use to find this information.
                     </p>
 
                     <h3>Process</h3>
-                    <p>Three questions shaped the product direction:</p>
-                    <ul style="padding-left: 20px;">
-                        <li>What does the player already know vs. what do they need to look up?</li>
-                        <li>How much setup friction is acceptable for a casual, low-stakes gaming task?</li>
-                        <li>Can the app work without accounts, a backend, or any onboarding?</li>
-                    </ul>
-                    <br>
                     <p>
-                        The key insight was that players know their own wardrobe but don't know the villager preference data.
-                        The app should encode all villager and item data statically, and let players manage only their inventory —
-                        keeping the experience fast and personal without any infrastructure.
+                        I know my own wardrobe but I don't know the villager preference data off the top of my head.
+                        So I encoded all villager and item data statically into the app and let the user manage only their inventory —
+                        keeping the experience lightweight with no accounts or backend needed.
                     </p>
 
                     <h4>User Segment</h4>
@@ -102,15 +97,15 @@
                     </ul>
                     <br>
                     <p>
-                        The core pain point was the gap between "items I already own" and "items that will actually work" —
-                        a filter problem, not a discovery problem. Players don't need to find new items; they need to know
-                        which of their existing items to use.
+                        I identified the core pain point as the gap between "items I already own" and "items that will actually work" —
+                        a filter problem, not a discovery problem. I didn't need to find new items; I needed to know
+                        which of my existing items to use.
                     </p>
 
                     <h3>Solution</h3>
                     <ul style="padding-left: 20px;">
-                        <li><strong>Villagers tab:</strong> pin up to 10 island residents; each card shows matched gifts from your inventory with a count badge, favorite styles as color-coded pills, and favorite colors as swatches</li>
-                        <li><strong>Inventory tab:</strong> two-panel layout — full 1,458-item catalog with style and source filters on the left, your current inventory in a sticky sidebar on the right; one click adds or removes any item</li>
+                        <li><strong>Villagers tab:</strong> I can pin up to 10 island residents; each card shows matched gifts from my inventory with a count badge, favorite styles as color-coded pills, and favorite colors as swatches</li>
+                        <li><strong>Inventory tab:</strong> two-panel layout — full 1,458-item catalog with style and source filters on the left, my current inventory in a sticky sidebar on the right; one click adds or removes any item</li>
                         <li>Fuzzy search via Fuse.js across item names, styles, and sources; multi-select filters for villager personality and species</li>
                         <li>All state persists in localStorage — no login, no backend, no data loss between sessions</li>
                     </ul>
@@ -122,9 +117,6 @@
                         <span class="project-tag">React 18</span>
                         <span class="project-tag">Vite 5</span>
                         <span class="project-tag">Fuse.js</span>
-                        <span class="project-tag">localStorage</span>
-                        <span class="project-tag">CSS</span>
-                        <span class="project-tag">JavaScript</span>
                     </div>
 
                     <div class="project-tags mt-4">
