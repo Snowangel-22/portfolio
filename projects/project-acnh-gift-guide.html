@@ -62,40 +62,58 @@
                 <div class="col-lg-8">
                     <h2>Project Overview</h2>
                     <p>
-                        In Animal Crossing: New Horizons, gifting items to villagers increases friendship — but each villager has two
-                        favorite styles and two favorite colors, and the game's catalog has over 1,400 clothing items.
-                        Figuring out which items in your personal wardrobe actually match a given villager's preferences
-                        requires a lot of manual cross-referencing.
+                        In Animal Crossing: New Horizons, gifting is one of the primary mechanics for raising friendship with villagers.
+                        Each villager has two preferred clothing styles and two preferred colors, and the in-game catalog spans over 1,400 items.
+                        Finding the right gift means cross-referencing a wiki against your personal wardrobe — a tedious enough process
+                        that most players skip it entirely.
                     </p>
                     <p>
-                        ACNH Gift Guide solves this by letting you build a personal clothing inventory and pin the villagers
-                        living on your island. Each villager card automatically shows which of your items match their style
-                        preferences, so you can find the perfect gift in seconds instead of minutes.
+                        ACNH Gift Guide removes that friction. Players build a personal clothing inventory and pin the villagers
+                        living on their island; the app instantly surfaces which items match each villager's preferences,
+                        turning a multi-step lookup into a single glance.
                     </p>
 
-                    <h3>Key Features</h3>
+                    <h3>Process</h3>
+                    <p>Three questions shaped the product direction:</p>
                     <ul style="padding-left: 20px;">
-                        <li>Pin up to 10 island villagers (matching the in-game limit); search by name, species, or personality</li>
-                        <li>Multi-select filters for personality type and species to quickly narrow down villagers</li>
-                        <li>Browse all 1,458 clothing items; filter by style (Elegant, Cute, Active, Cool, Simple, Gorgeous) or source (Able Sisters, Nook's Cranny, seasonal events, and more)</li>
-                        <li>One-click inventory management — add or remove items from your personal collection</li>
-                        <li>Automatic gift matching on every villager card — shows exactly which inventory items match their favorite styles, with a count badge</li>
-                        <li>Fuzzy search powered by Fuse.js across names, styles, and sources</li>
-                        <li>All data persists in localStorage — no login, no backend, no data loss between sessions</li>
+                        <li>What does the player already know vs. what do they need to look up?</li>
+                        <li>How much setup friction is acceptable for a casual, low-stakes gaming task?</li>
+                        <li>Can the app work without accounts, a backend, or any onboarding?</li>
                     </ul>
                     <br>
+                    <p>
+                        The key insight was that players know their own wardrobe but don't know the villager preference data.
+                        The app should encode all villager and item data statically, and let players manage only their inventory —
+                        keeping the experience fast and personal without any infrastructure.
+                    </p>
 
-                    <h3>How It Works</h3>
+                    <h4>User Segment</h4>
                     <p>
-                        The app is organized into two tabs. The <strong>Villagers</strong> tab shows the full roster of 391 villagers;
-                        pinned ones float to the top. Each card displays the villager's favorite styles as color-coded badges
-                        and favorite colors as swatches, plus a live list of matched gifts from your inventory.
+                        AC:NH players who actively use the gifting mechanic to raise friendship levels. They're motivated enough
+                        to collect items and interact with villagers daily, but find the lookup process —
+                        switching between a wiki and their in-game storage — tedious enough to skip.
                     </p>
+
+                    <h4>Pain Points</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Too much data: 391 villagers × 1,458 clothing items means an overwhelming number of combinations</li>
+                        <li>No personal context: external wikis list all items, not just the ones you own</li>
+                        <li>Repeated friction: the lookup has to happen fresh for every villager, every time</li>
+                    </ul>
+                    <br>
                     <p>
-                        The <strong>Inventory</strong> tab has a two-panel layout: the full clothing catalog on the left with search
-                        and filters, and a sticky sidebar on the right showing your current inventory. Clicking an item adds or
-                        removes it from your collection, and all villager gift matches update instantly.
+                        The core pain point was the gap between "items I already own" and "items that will actually work" —
+                        a filter problem, not a discovery problem. Players don't need to find new items; they need to know
+                        which of their existing items to use.
                     </p>
+
+                    <h3>Solution</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Villagers tab:</strong> pin up to 10 island residents; each card shows matched gifts from your inventory with a count badge, favorite styles as color-coded pills, and favorite colors as swatches</li>
+                        <li><strong>Inventory tab:</strong> two-panel layout — full 1,458-item catalog with style and source filters on the left, your current inventory in a sticky sidebar on the right; one click adds or removes any item</li>
+                        <li>Fuzzy search via Fuse.js across item names, styles, and sources; multi-select filters for villager personality and species</li>
+                        <li>All state persists in localStorage — no login, no backend, no data loss between sessions</li>
+                    </ul>
                 </div>
 
                 <div class="col-lg-4">
@@ -113,14 +131,13 @@
                         <h4>Project Details</h4>
                         <p><strong>Type:</strong> Personal Project</p>
                         <p><strong>Data:</strong> 391 villagers · 1,458 clothing items</p>
-                        <p><strong>Deployment:</strong> Vercel (coming soon)</p>
+                        <p><strong>Deployment:</strong> Vercel</p>
                     </div>
 
                     <div class="project-tags mt-4">
                         <h4>Links</h4>
-                        <!-- Replace [GITHUB_URL] with your repository URL -->
-                        <a href="[GITHUB_URL]" class="back-link" target="_blank" rel="noopener noreferrer">
-                            <i class='uil uil-github'></i> View on GitHub
+                        <a href="https://acnh-gift-guide-tawny.vercel.app/" class="back-link" target="_blank" rel="noopener noreferrer">
+                            <i class='uil uil-external-link-alt'></i> Live Demo
                         </a>
                     </div>
                 </div>
