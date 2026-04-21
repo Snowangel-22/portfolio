@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="ACNH Gift Guide - Angela Gao Portfolio">
+    <meta name="author" content="Angela Gao">
+
+    <title>ACNH Gift Guide</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/unicons.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="../css/tooplate-style.css">
+
+    <!-- PROJECTS STYLE -->
+    <link rel="stylesheet" href="../css/projects.css">
+
+    <!-- OVERRIDES: Fonts & Accent -->
+    <link rel="stylesheet" href="../css/overrides.css">
+
+  </head>
+  <body>
+
+    <!-- NAVBAR (loaded from includes/navbar.html) -->
+    <div id="navbar-container"></div>
+
+    <!-- PROJECT HERO -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1>ACNH Gift Guide</h1>
+                    <p>A gift-planning tool for Animal Crossing: New Horizons players</p>
+                </div>
+                <div class="row mt-5">
+                  <div class="col-lg-12">
+                      <div class="project-image">
+                          <a href="https://acnh-gift-guide-tawny.vercel.app/" target="_blank" rel="noopener noreferrer">
+                              <img src="../images/project/project-acnh-gift-guide-cover.svg" alt="ACNH Gift Guide">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT CONTENT -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="../projects.html" class="back-link">
+                        <i class='uil uil-arrow-left'></i> Back to Projects
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2>Project Overview</h2>
+                    <p>
+                        In Animal Crossing: New Horizons, gifting is one of the primary mechanics for raising friendship with villagers.
+                        Each villager has two preferred clothing styles and two preferred colors, and the in-game catalog spans over 1,400 items.
+                        When I gift villagers, often they will give something back that I do not want to keep. So instead of selling them,
+                        I want to gift them to another villager who will appreciate it (more than I do).
+                    </p>
+                    <p>
+                        I built this Gift Guide to remove that friction of not knowing who would like my gifts. I can log my clothing inventory, pin the villagers on my island,
+                        and the app instantly shows me which items I already own that match each villager's preferences.
+                        This replaces the multiple phone and computer tabs I use to find this information.
+                    </p>
+
+                    <h3>Process</h3>
+                    <p>
+                        I know my own wardrobe but I don't know the villager preference data off the top of my head.
+                        So I encoded all villager and item data statically into the app and let the user manage only their inventory —
+                        keeping the experience lightweight with no accounts or backend needed.
+                    </p>
+
+                    <h4>User Segment</h4>
+                    <p>
+                        AC:NH players who actively use the gifting mechanic to raise friendship levels. They're motivated enough
+                        to collect items and interact with villagers daily, but find the lookup process —
+                        switching between a wiki and their in-game storage — tedious enough to skip.
+                    </p>
+
+                    <h4>Pain Points</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Too much data: 391 villagers × 1,458 clothing items means an overwhelming number of combinations</li>
+                        <li>No personal context: external wikis list all items, not just the ones you own</li>
+                        <li>Repeated friction: the lookup has to happen fresh for every villager, every time</li>
+                    </ul>
+                    <br>
+                    <p>
+                        I identified the core pain point as the gap between "items I already own" and "items that will actually work" —
+                        a filter problem, not a discovery problem. I didn't need to find new items; I needed to know
+                        which of my existing items to use.
+                    </p>
+
+                    <h3>Solution</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Villagers tab:</strong> I can pin up to 10 island residents; each card shows matched gifts from my inventory with a count badge, favorite styles as color-coded pills, and favorite colors as swatches</li>
+                        <li><strong>Inventory tab:</strong> two-panel layout — full 1,458-item catalog with style and source filters on the left, my current inventory in a sticky sidebar on the right; one click adds or removes any item</li>
+                        <li>Fuzzy search via Fuse.js across item names, styles, and sources; multi-select filters for villager personality and species</li>
+                        <li>All state persists in localStorage — no login, no backend, no data loss between sessions</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="project-tags">
+                        <h4>Technologies Used</h4>
+                        <span class="project-tag">React 18</span>
+                        <span class="project-tag">Vite 5</span>
+                        <span class="project-tag">Fuse.js</span>
+                    </div>
+
+                    <div class="project-tags mt-4">
+                        <h4>Project Details</h4>
+                        <p><strong>Type:</strong> Personal Project</p>
+                        <p><strong>Data:</strong> 391 villagers · 1,458 clothing items</p>
+                        <p><strong>Deployment:</strong> Vercel</p>
+                    </div>
+
+                    <div class="project-tags mt-4">
+                        <h4>Links</h4>
+                        <a href="https://acnh-gift-guide-tawny.vercel.app/" class="back-link" target="_blank" rel="noopener noreferrer">
+                            <i class='uil uil-external-link-alt'></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER (loaded from includes/footer.html) -->
+    <div id="footer-container"></div>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/includes.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/Headroom.js"></script>
+    <script src="../js/jQuery.headroom.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/smoothscroll.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/logo-config.js"></script>
+
+  </body>
+</html>
