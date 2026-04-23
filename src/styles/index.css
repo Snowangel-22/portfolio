@@ -1,0 +1,83 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --accent: #3f0070;
+  --accent-hover: #5a00a6;
+  --accent-muted: rgba(63, 0, 112, 0.1);
+  --accent-contrast: #ffffff;
+
+  --bg: #f2ead8;
+  --bg-subtle: #e8dec7;
+  --surface: #f7f1e0;
+
+  --text-primary: #2a1f0d;
+  --text-secondary: #6b553b;
+  --text-tertiary: #9c8769;
+  --text-inverse: #f2ead8;
+
+  --border: #d4c49e;
+  --border-strong: #ad9669;
+
+  --radius-sm: 6px;
+  --radius-card: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 16px 44px rgba(0, 0, 0, 0.28);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  --transition: 0.3s ease;
+  --transition-fast: 0.15s ease;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  --accent: #b78cff;
+  --accent-hover: #c9a8ff;
+  --accent-muted: rgba(183, 140, 255, 0.15);
+  --accent-contrast: #0c0c0d;
+
+  --bg: #0c0c0d;
+  --bg-subtle: #161617;
+  --surface: #1a1a1b;
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #9a9a9a;
+  --text-tertiary: #6a6a6a;
+  --text-inverse: #0c0c0d;
+
+  --border: #2a2a2a;
+  --border-strong: #3a3a3a;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  @apply antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-text-primary font-body;
+  color: var(--text-primary);
+  background-color: var(--bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-bold;
+}
+
+.subtitle {
+  @apply font-subtitle;
+}
+
+a {
+  @apply transition-colors;
+}
