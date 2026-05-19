@@ -1,42 +1,14 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import { FiSun, FiMoon } from 'react-icons/fi'
 import agLogo from '../../assets/ag-logo.svg'
 
 export default function Navbar({ theme, onThemeToggle }) {
-  const [isHidden, setIsHidden] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
   const [isSolid, setIsSolid] = useState(false)
 
   useEffect(() => {
-    let lastScrollY = 0
-    let ticking = false
-
-    const updateNavBar = () => {
-      const currentScrollY = window.scrollY
-
-      // Show/hide on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsHidden(true)
-      } else {
-        setIsHidden(false)
-      }
-
-      // Solid background after hero scroll
-      setIsSolid(currentScrollY > window.innerHeight * 0.8)
-
-      lastScrollY = currentScrollY
-      setScrollY(currentScrollY)
-      ticking = false
-    }
-
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateNavBar)
-        ticking = true
-      }
+      setIsSolid(window.scrollY > window.innerHeight * 0.8)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -51,9 +23,7 @@ export default function Navbar({ theme, onThemeToggle }) {
   return (
     <>
       {/* Desktop Navbar */}
-      <motion.nav
-        animate={{ y: isHidden ? -100 : 0 }}
-        transition={{ duration: 0.3 }}
+      <nav
         className="hidden sm:flex fixed top-0 left-0 right-0 z-40 items-center justify-between px-6 lg:px-12 h-16 transition-all duration-300"
         style={{
           backgroundColor: isSolid ? 'var(--surface)' : 'transparent',
@@ -84,14 +54,10 @@ export default function Navbar({ theme, onThemeToggle }) {
         >
           {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
         </button>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Bottom Navigation */}
-      <motion.nav
-        animate={{ y: isHidden && scrollY > 200 ? 100 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="sm:hidden fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around px-4 h-14 bg-surface backdrop-blur-md border-t border-border"
-      >
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around px-4 h-14 bg-surface backdrop-blur-md border-t border-border">
         {navLinks.map(link => (
           <a
             key={link.name}
@@ -108,7 +74,7 @@ export default function Navbar({ theme, onThemeToggle }) {
         >
           {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
         </button>
-      </motion.nav>
+      </nav>
     </>
   )
 }

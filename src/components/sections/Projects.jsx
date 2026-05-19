@@ -41,15 +41,6 @@ export default function Projects() {
                 Things I've built.
               </h2>
             </div>
-            <a
-              href="#"
-              className="text-sm font-medium text-text-primary inline-flex items-center gap-1 hover:text-accent transition-colors"
-            >
-              View all
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
           </motion.div>
 
           {/* Cards grid */}
@@ -80,6 +71,7 @@ export default function Projects() {
             >
               {projects
                 .filter(p => !p.featured)
+                .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''))
                 .map((project, index) => (
                   <motion.button
                     key={project.id}

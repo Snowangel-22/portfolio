@@ -2,6 +2,7 @@ import appliedMaterialsGTMCover from '../../public/images/project/project-Applie
 import acnhCover from '../../public/images/project/project-acnh-gift-guide-cover.png'
 import lOrealCover from '../../public/images/project/project-LOreal-cover.jpg'
 import erpCover from '../../public/images/project/project-ERP-cover.jpg'
+import fireworksAICover from '../../public/images/project/project-FireworksAI-TakeHome.png'
 
 export const projects = [
   {
@@ -17,6 +18,7 @@ export const projects = [
     role: "Product Manager - Service Product",
     company: "Applied Materials",
     period: "July 2024 - Present",
+    sortDate: "2099-07",
     team: "Cross-functional: Sales, Engineering, Marketing",
 
     problem: "Applied Materials needed to expand a new line of hardware services. The service offering existed but lacked a coherent go-to-market strategy, pricing model, and sales narrative. Early customers generated interest but there was no systematic approach to scaling.",
@@ -26,8 +28,7 @@ export const projects = [
     results: [
       "Generated $500K+ in contract revenue within 6 months",
       "Hit 100% renewal rate on current service contracts",
-      "Identified and closed upselling opportunities that exceeded quota per quarter",
-      "Enabled 4 sales reps to close larger deals with 2x average deal size"
+      "Identified and closed upselling opportunities that exceeded quota per quarter"
     ],
 
     keyMetrics: [
@@ -49,6 +50,7 @@ export const projects = [
     role: "Solo Engineer",
     company: "Personal Project",
     period: "March 2026",
+    sortDate: "2026-03",
     team: "Solo",
 
     problem: "In Animal Crossing: New Horizons, each of 391 villagers has style preferences across 1,458 items. The in-game UI doesn't show preferences, and looking them up requires switching between wiki tabs and in-game storage. Friction kills the gifting loop.",
@@ -57,8 +59,6 @@ export const projects = [
 
     results: [
       "Removed lookup friction — from 10 minutes to <1 minute per villager",
-      "Shipped to production in 1 day",
-      "95+ Lighthouse performance score",
       "Positive reception in r/AnimalCrossing community"
     ],
   },
@@ -69,12 +69,13 @@ export const projects = [
     description: "Submitted LuminAl — a personalized skincare routine builder powered by AI — to an international product competition. Led market research, product definition, and prototype with 3-person team.",
     tags: ["Figma", "Market Research", "AI", "Lovable"],
     image: lOrealCover,
-    featured: true,
+    featured: false,
     type: "pm",
 
     role: "Product Lead",
     company: "Brandstorm 2025 (Team Project)",
     period: "August 2024 - November 2024",
+    sortDate: "2024-11",
     team: "PM, Engineer, Marketing (3 people)",
 
     problem: "Young men struggle to start skincare routines. They face information overload, conflicting advice, and feel intimidated by the product landscape. They want personalized guidance but don't know where to start.",
@@ -100,7 +101,8 @@ export const projects = [
 
     role: "Case Study Candidate",
     company: "Startup PM Interview",
-    period: "One-week assignment",
+    period: "July 2025",
+    sortDate: "2025-07",
     team: "Solo",
 
     problem: "Customer is running a legacy ERP with workflows trapped in spreadsheets. They need a proof of concept showing how a cloud-based solution can modernize their processes and predict future needs.",
@@ -111,6 +113,34 @@ export const projects = [
       "Completed all three deliverables in take-home format",
       "Demonstrated understanding of both customer workflows and technical implementation",
       "Showed product thinking by including timeline and future value proposition"
+    ],
+  },
+
+  {
+    id: "fireworks-ai",
+    title: "Fireworks AI Take-Home",
+    tagline: "Model selection tool for engineers evaluating open model migration — built in 2 hours.",
+    description: "2-hour PM interview take-home: designed and built a working web app that helps engineers compare open-source models hosted on Fireworks AI. Covers model discovery, side-by-side comparison, and a migration decision framework.",
+    tags: ["React", "Fireworks AI API", "LLM", "Product Design"],
+    image: fireworksAICover,
+    featured: true,
+    type: "engineering",
+    externalLink: "https://fireworks-ai-six.vercel.app/",
+
+    role: "PM Candidate — Take-Home Assignment",
+    company: "Fireworks AI Interview",
+    period: "May 2026",
+    sortDate: "2026-05",
+    team: "Solo",
+
+    problem: "Engineers evaluating a switch from proprietary LLMs (OpenAI, Anthropic) to open models face a fragmented research process: specs are scattered across docs, pricing comparisons are manual, and there's no structured way to test models against their actual workload before committing.",
+
+    solution: "Built a model selection and comparison tool using the Fireworks AI API. The app surfaces available models with specs and pricing, lets users run side-by-side prompt tests across models, and presents a lightweight migration decision framework to guide the evaluation process.",
+
+    results: [
+      "Delivered a working, deployed prototype within the 2-hour window",
+      "Covers the full engineer journey: discover → compare → decide",
+      "Live at fireworks-ai-six.vercel.app"
     ],
   },
 
@@ -127,6 +157,7 @@ export const projects = [
     role: "Solo Designer & Engineer",
     company: "Personal Project",
     period: "April 2026",
+    sortDate: "2026-04",
     team: "Solo",
 
     problem: "Portfolio needed to reflect a unique brand positioning: 100% PM + 100% Engineer. Static portfolios don't showcase product thinking or interaction design. Needed something interactive and memorable that demonstrates both design sensibility and technical execution.",

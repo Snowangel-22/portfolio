@@ -77,7 +77,7 @@ export default function Hero() {
           className="text-text-secondary leading-relaxed mb-8 max-w-xl"
           style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
         >
-          100% Product. 100% Technical. 200% Builder. EECS + Business UC Berkeley — PM/GTM @ Applied Materials.
+          EECS + Business UC Berkeley — PM/GTM @ Applied Materials.
         </motion.p>
 
         {/* CTAs */}
