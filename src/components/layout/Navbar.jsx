@@ -16,7 +16,7 @@ export default function Navbar({ theme, onThemeToggle }) {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Resume', href: '/resume.pdf' },
+    { name: 'Resume', href: `${import.meta.env.BASE_URL}resume.pdf` },
     { name: 'Contact', href: '#contact' },
   ]
 

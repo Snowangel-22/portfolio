@@ -28,6 +28,8 @@ dist-ssr
 .env.local
 .env.*.local
 
+CLAUDE.md
+
 # v1 (old portfolio) and design files
 v1-files/
 claude-design-system/

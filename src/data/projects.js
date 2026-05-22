@@ -1,8 +1,9 @@
-import appliedMaterialsGTMCover from '../../public/images/project/project-AppliedMaterials-GTM.png'
-import acnhCover from '../../public/images/project/project-acnh-gift-guide-cover.png'
-import lOrealCover from '../../public/images/project/project-LOreal-cover.jpg'
-import erpCover from '../../public/images/project/project-ERP-cover.jpg'
-import fireworksAICover from '../../public/images/project/project-FireworksAI-TakeHome.png'
+const base = import.meta.env.BASE_URL
+const appliedMaterialsGTMCover = `${base}images/project/project-AppliedMaterials-GTM.png`
+const acnhCover = `${base}images/project/project-acnh-gift-guide-cover.png`
+const lOrealCover = `${base}images/project/project-LOreal-cover.jpg`
+const erpCover = `${base}images/project/project-ERP-cover.jpg`
+const fireworksAICover = `${base}images/project/project-FireworksAI-TakeHome.png`
 
 export const projects = [
   {
@@ -13,10 +14,11 @@ export const projects = [
     tags: ["Product Management", "GTM", "Data Analytics", "AI"],
     image: appliedMaterialsGTMCover,
     featured: true,
+    hidden: true,
     type: "pm",
 
     role: "Product Manager - Service Product",
-    company: "Applied Materials",
+    context: "Applied Materials",
     period: "July 2024 - Present",
     sortDate: "2099-07",
     team: "Cross-functional: Sales, Engineering, Marketing",
@@ -39,8 +41,8 @@ export const projects = [
   {
     id: "acnh-gift-guide",
     title: "ACNH Gift Guide",
-    tagline: "Gift-planning tool for 391 villagers with inventory matching.",
-    description: "Personal engineering project — a gift-finder for Animal Crossing: New Horizons players. Matches your owned items to 391 villager style preferences using React, Vite, and Fuse.js fuzzy search.",
+    tagline: "Find the perfect gift for your Animal Crossing villagers, matched to your actual inventory.",
+    description: "A gift-finder for Animal Crossing: New Horizons players. Matches owned items to villager style preferences across 1,458 items. Built with React, Vite, and Fuse.js fuzzy search.",
     tags: ["React", "Vite", "Fuse.js", "localStorage"],
     image: acnhCover,
     featured: true,
@@ -48,44 +50,45 @@ export const projects = [
     externalLink: "https://acnh-gift-guide-tawny.vercel.app/",
 
     role: "Solo Engineer",
-    company: "Personal Project",
+    context: "Personal Project",
     period: "March 2026",
     sortDate: "2026-03",
     team: "Solo",
 
     problem: "In Animal Crossing: New Horizons, each of 391 villagers has style preferences across 1,458 items. The in-game UI doesn't show preferences, and looking them up requires switching between wiki tabs and in-game storage. Friction kills the gifting loop.",
 
-    solution: "Built a web app that statically encodes all villager and item preference data, lets players log their owned inventory, and instantly shows which items match each villager's style. Uses Fuse.js for fuzzy search and localStorage for persistence — no backend required.",
+    solution: "Built a web app that encodes all 391 villagers and 1,458 items statically. Players log their inventory, and the app instantly surfaces matching items per villager. Fuse.js handles fuzzy search. localStorage handles persistence. No backend needed.",
 
     results: [
-      "Removed lookup friction — from 10 minutes to <1 minute per villager",
-      "Positive reception in r/AnimalCrossing community"
+      "Reduced lookup time from 10 minutes to under 1 minute per villager",
+      "Positive reception in r/AnimalCrossing community",
+      "50 monthly active visitors"
     ],
   },
   {
     id: "loreal-brandstorm",
     title: "L'Oreal Brandstorm 2025",
-    tagline: "AI-powered skincare routine builder pitched to international competition.",
-    description: "Submitted LuminAl — a personalized skincare routine builder powered by AI — to an international product competition. Led market research, product definition, and prototype with 3-person team.",
+    tagline: "Personalized skincare coach for men, pitched to L'Oreal Brandstorm 2025.",
+    description: "Led a 3-person team to define and pitch LuminAl, an AI skincare coach for men new to skincare. Covered market research, product definition, and a full pitch deck for an international competition.",
     tags: ["Figma", "Market Research", "AI", "Lovable"],
     image: lOrealCover,
     featured: false,
     type: "pm",
 
     role: "Product Lead",
-    company: "Brandstorm 2025 (Team Project)",
+    context: "Brandstorm 2025 (Team Project)",
     period: "August 2024 - November 2024",
     sortDate: "2024-11",
     team: "PM, Engineer, Marketing (3 people)",
 
-    problem: "Young men struggle to start skincare routines. They face information overload, conflicting advice, and feel intimidated by the product landscape. They want personalized guidance but don't know where to start.",
+    problem: "Young men starting skincare face information overload and no personalized entry point. Existing apps are built for enthusiasts, not beginners.",
 
-    solution: "LuminAl is a personalized skincare routine builder powered by AI. Whenever the user tries a new product, it links product information (such as ingredients) with user recorded feedback. It will find commonalities and personalize the routine to help the user work towards their skincare goal.",
+    solution: "Defined LuminAl, an AI skincare coach that links product ingredients to user feedback over time and builds a personalized routine from real usage data. Led market research, product definition, and pitch deck across a 3-person team.",
 
     results: [
-      "Demonstrated working prototype with product memory",
-      "Received positive feedback on UX and AI personalization logic",
-      "Estimated 35% improvement in routine recommendation accuracy vs static guides"
+      "Submitted to L'Oreal Brandstorm 2025 international competition",
+      "Delivered full product pitch: market sizing, user research, product concept, and UX prototype",
+      "Scoped a technically feasible MVP using existing ingredient APIs and LLM personalization",
     ],
   },
   
@@ -100,76 +103,74 @@ export const projects = [
     type: "pm",
 
     role: "Case Study Candidate",
-    company: "Startup PM Interview",
+    context: "Startup PM Interview",
     period: "July 2025",
     sortDate: "2025-07",
     team: "Solo",
 
-    problem: "Customer is running a legacy ERP with workflows trapped in spreadsheets. They need a proof of concept showing how a cloud-based solution can modernize their processes and predict future needs.",
+    problem: "Mid-market enterprises running legacy ERPs manage inventory demand manually, through spreadsheets and gut feel. Errors are costly and reactive.",
 
-    solution: "Delivered three components: (1) Executive-ready slide deck with business case, (2) Data model in spreadsheet with prediction logic for inventory stocking, (3) Product memo detailing features, roadmap, and implementation approach.",
+    solution: "Built three deliverables for ARP's PM interview: an inventory demand prediction model in spreadsheet form, an executive pitch deck with business case for cloud migration, and a product memo covering features, roadmap, and implementation approach.",
 
     results: [
-      "Completed all three deliverables in take-home format",
-      "Demonstrated understanding of both customer workflows and technical implementation",
-      "Showed product thinking by including timeline and future value proposition"
+      "Completed a 3-part case study covering data modeling, customer narrative, and product strategy",
+      "Prediction model forecasted inventory demand using historical order patterns",
+      "Delivered within a one-week window as a solo assignment",
     ],
   },
 
   {
     id: "fireworks-ai",
     title: "Fireworks AI Take-Home",
-    tagline: "Model selection tool for engineers evaluating open model migration — built in 2 hours.",
-    description: "2-hour PM interview take-home: designed and built a working web app that helps engineers compare open-source models hosted on Fireworks AI. Covers model discovery, side-by-side comparison, and a migration decision framework.",
+    tagline: "Model selector and evaluator for engineers migrating from closed to open models.",
+    description: "A web app that recommends open models for a given prompt, runs them live, and compares latency, cost, and token usage side by side.",
     tags: ["React", "Fireworks AI API", "LLM", "Product Design"],
     image: fireworksAICover,
     featured: true,
     type: "engineering",
     externalLink: "https://fireworks-ai-six.vercel.app/",
 
-    role: "PM Candidate — Take-Home Assignment",
-    company: "Fireworks AI Interview",
+    role: "APM Candidate",
+    context: "Fireworks AI Interview",
     period: "May 2026",
     sortDate: "2026-05",
     team: "Solo",
 
-    problem: "Engineers evaluating a switch from proprietary LLMs (OpenAI, Anthropic) to open models face a fragmented research process: specs are scattered across docs, pricing comparisons are manual, and there's no structured way to test models against their actual workload before committing.",
+    problem: "Software and ML engineers at AI-forward startups and enterprises have one core question when evaluating open models: \"Will this be good enough for my specific use case and prompts?\" Cost and latency advantages are obvious once quality parity is shown, but there's no easy way to test that parity against real workloads. Technical migration is too customer-specific to generalize, so the blocker is always quality validation first.",
 
-    solution: "Built a model selection and comparison tool using the Fireworks AI API. The app surfaces available models with specs and pricing, lets users run side-by-side prompt tests across models, and presents a lightweight migration decision framework to guide the evaluation process.",
+    solution: "Built a model recommender and evaluation tool on the Fireworks AI API. Engineers paste in their existing prompt, get model recommendations ranked for their use case, then run the prompt live across top candidates. Latency, token usage, and cost are shown side by side. The output is a downloadable comparison summary designed to be shared as an internal pitch for migrating off proprietary models.",
 
     results: [
       "Delivered a working, deployed prototype within the 2-hour window",
-      "Covers the full engineer journey: discover → compare → decide",
-      "Live at fireworks-ai-six.vercel.app"
+      { text: "Wrote a product spec covering user research, scoping decisions, and feature rationale", href: "fireworks-ai-spec.pdf" },
+      "Scoped deliberately: excluded technical migration (too customer-specific) to focus on the highest-leverage blocker, quality validation",
     ],
   },
 
   {
     id: "portfolio-v2",
     title: "Portfolio v2",
-    tagline: "Interactive, animated personal portfolio showcasing product + engineering.",
-    description: "Rebuilt personal portfolio from scratch using React 18, Vite 5, and Tailwind CSS. Features scroll-triggered animations, interactive project modals, light/dark theme toggle, and a playful Tangram puzzle element. Designed to showcase both product thinking (UX, narrative) and engineering ability (React, animation, responsive design).",
+    tagline: "Personal portfolio built to show both product thinking and engineering execution.",
+    description: "Built from scratch with React 18, Vite, and Tailwind CSS. Features scroll-reveal animations, project modals, and a light/dark theme toggle. Designed and deployed solo.",
     tags: ["React 18", "Vite 5", "Tailwind CSS", "Framer Motion"],
     image: appliedMaterialsGTMCover,
     featured: false,
     type: "engineering",
 
     role: "Solo Designer & Engineer",
-    company: "Personal Project",
+    context: "Personal Project",
     period: "April 2026",
     sortDate: "2026-04",
     team: "Solo",
 
-    problem: "Portfolio needed to reflect a unique brand positioning: 100% PM + 100% Engineer. Static portfolios don't showcase product thinking or interaction design. Needed something interactive and memorable that demonstrates both design sensibility and technical execution.",
+    problem: "Needed a portfolio that reflects the actual brand: technical enough to show engineering ability, product-minded enough to show UX thinking. A static site wouldn't cut it.",
 
-    solution: "Built a custom React portfolio with: (1) Scroll-reveal animations using Framer Motion, (2) Project details in interactive modals instead of separate pages, (3) Light/dark theme toggle integrated into navbar, (4) Responsive layout for mobile/tablet/desktop, (5) Tangram puzzle as hero interactive element. Warm parchment + deep purple aesthetic paired with smooth interactions.",
+    solution: "Built with React 18, Vite, and Framer Motion. Project details open in modals instead of new pages. Scroll-reveal animations, light/dark theme toggle, and responsive layout across all breakpoints.",
 
     results: [
-      "Complete portfolio redesign with custom interactions",
-      "Demonstrates product thinking through UX decisions (modals, expand/collapse, theme toggle)",
-      "Showcases React + animation expertise via Framer Motion",
-      "Responsive design tested across breakpoints",
-      "Interactive Tangram element (in progress) for delightful engagement"
+      "Deployed and live for recruiters and peers",
+      "Built and iterated entirely solo, from design to deployment",
+      "Ships as a GitHub Pages static site with automated deploy via gh-pages",
     ],
   },
 ]

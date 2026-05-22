@@ -213,7 +213,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 >
                   {[
                     { label: 'Role', value: project.role },
-                    { label: 'Company', value: project.company },
+                    { label: 'Context', value: project.context },
                     { label: 'Period', value: project.period },
                     { label: 'Team', value: project.team },
                   ].map(item => (
@@ -304,7 +304,17 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                           >
                             •
                           </span>
-                          {result}
+                          {typeof result === 'string' ? result : (
+                            <a
+                              href={`${import.meta.env.BASE_URL}${result.href}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={e => e.stopPropagation()}
+                              style={{ color: 'var(--accent)', textDecoration: 'underline' }}
+                            >
+                              {result.text}
+                            </a>
+                          )}
                         </li>
                       ))}
                     </ul>

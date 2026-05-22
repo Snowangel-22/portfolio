@@ -17,7 +17,8 @@ export default function Projects() {
   const { ref, isVisible } = useScrollReveal()
   const [selectedProject, setSelectedProject] = useState(null)
 
-  const featuredProjects = projects.filter(p => p.featured)
+  const visibleProjects = projects.filter(p => !p.hidden)
+  const featuredProjects = visibleProjects.filter(p => p.featured)
 
   return (
     <>
@@ -62,14 +63,14 @@ export default function Projects() {
           </motion.div>
 
           {/* Non-featured projects list */}
-          {projects.some(p => !p.featured) && (
+          {visibleProjects.some(p => !p.featured) && (
             <motion.div
               initial="hidden"
               animate={isVisible ? 'visible' : 'hidden'}
               variants={containerVariants}
               style={{ marginTop: 48, paddingTop: 48, borderTop: '1px solid var(--border)' }}
             >
-              {projects
+              {visibleProjects
                 .filter(p => !p.featured)
                 .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''))
                 .map((project, index) => (

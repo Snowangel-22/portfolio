@@ -87,7 +87,7 @@ export default function Hero() {
         >
           {/* Resume — primary */}
           <a
-            href="/resume.pdf"
+            href={`${import.meta.env.BASE_URL}resume.pdf`}
             download
             className="inline-flex items-center gap-2 px-5 py-3 font-semibold text-sm rounded-card transition-all duration-300"
             style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
