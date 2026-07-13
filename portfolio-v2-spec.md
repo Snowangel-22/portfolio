@@ -1,6 +1,6 @@
-# Portfolio V2 — Template Spec
+# Portfolio V2 — Spec
 
-> One-pager. React + Vite. Mobile-first. No dependencies on v1.
+> One-pager. React + Vite. No React Router. Deployed to GitHub Pages.
 
 ---
 
@@ -11,408 +11,243 @@ React 18
 Vite 5
 Tailwind CSS 3
 Framer Motion
-React Router v6     ← only if individual project detail pages are kept
 ```
 
-**Deploy:** GitHub Pages via `gh-pages` npm package or GitHub Actions.
+No React Router — all sections on a single page. Case studies served as standalone HTML files in `public/`.
+
+**Deploy:** GitHub Pages via `gh-pages` npm package. Base path: `/portfolio/`.
 
 ---
 
 ## Project Structure
 
 ```
-portfolio-v2/
+portfolio/
 ├── public/
-│   ├── favicon.ico
-│   └── resume.pdf              ← linked from CTA button
+│   ├── images/
+│   │   └── project/            ← project cover images (16:9)
+│   ├── colare-case-study.html  ← standalone slide deck, linked from modal
+│   ├── fireworks-ai-spec.pdf
+│   └── resume.pdf
 │
 ├── src/
 │   ├── main.jsx
-│   ├── App.jsx
+│   ├── App.jsx                 ← theme toggle (light/dark), localStorage
 │   │
 │   ├── data/
-│   │   ├── projects.js         ← single source of truth for all project cards
-│   │   └── experience.js       ← work + education timeline entries
+│   │   ├── projects.js         ← single source of truth for all projects
+│   │   └── tags.js             ← master tag list; all projects import from here
 │   │
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.jsx
-│   │   │   └── Footer.jsx
+│   │   │   └── Navbar.jsx      ← sticky, theme toggle button
 │   │   │
 │   │   ├── sections/
 │   │   │   ├── Hero.jsx
-│   │   │   ├── Projects.jsx
-│   │   │   ├── Experience.jsx
-│   │   │   ├── Skills.jsx
+│   │   │   ├── Projects.jsx    ← modal state, hash-based deep linking
 │   │   │   └── Contact.jsx
 │   │   │
 │   │   └── ui/
 │   │       ├── ProjectCard.jsx
-│   │       ├── TimelineItem.jsx
+│   │       ├── ProjectModal.jsx
 │   │       ├── Tag.jsx
 │   │       └── AnimatedText.jsx
 │   │
 │   ├── hooks/
-│   │   └── useScrollReveal.js  ← shared hook for scroll-triggered animations
+│   │   └── useScrollReveal.js
 │   │
 │   └── styles/
-│       └── index.css           ← Tailwind directives + CSS variables only
+│       └── index.css           ← Tailwind directives + CSS variables
 │
 ├── index.html
 ├── vite.config.js
 ├── tailwind.config.js
-└── package.json
+└── CLAUDE.md
 ```
 
 ---
 
 ## Design Tokens
 
-Define in `index.css` as CSS variables. Tailwind config extends these.
+Defined in `src/styles/index.css`. Tailwind config extends these.
 
 ```css
 :root {
-  --accent: #3f0070;
-  --accent-hover: #5a00a6;
-  --accent-muted: rgba(63, 0, 112, 0.1);
+  --accent:        #3f0070;
+  --accent-hover:  #5a00a6;
+  --accent-muted:  rgba(63, 0, 112, 0.08);
+  --accent-contrast: #ffffff;
 
-  --bg: #ffffff;
-  --bg-subtle: #f7f7f8;
-  --surface: #ffffff;
+  --bg:            #f2ead8;
+  --bg-subtle:     #e8dcc8;
+  --surface:       #f7f1e0;
 
-  --text-primary: #111111;
-  --text-secondary: #5b5b5b;
-  --text-inverse: #ffffff;
+  --text-primary:   #2a1a0e;
+  --text-secondary: #6b553b;
+  --text-tertiary:  #9c8769;
 
-  --border: #ebebeb;
+  --border:        #d4c49e;
 
-  --radius-card: 12px;
-  --radius-pill: 9999px;
+  --radius-card:   12px;
+  --radius-lg:     16px;
+  --radius-pill:   9999px;
 
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.07);
+  --shadow-card:      0 4px 24px rgba(0, 0, 0, 0.07);
   --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.13);
-
-  --transition: 0.3s ease;
 }
 
 [data-theme="dark"] {
-  --bg: #0c0c0d;
-  --bg-subtle: #161617;
-  --surface: #1a1a1b;
-  --text-primary: #f0f0f0;
-  --text-secondary: #9a9a9a;
-  --border: #2a2a2a;
+  --bg:            #1a1208;
+  --bg-subtle:     #221808;
+  --surface:       #2a1e0a;
+  --text-primary:  #f0e8d8;
+  --text-secondary: #b09878;
+  --text-tertiary:  #7a6848;
+  --border:        #3a2c14;
 }
 ```
 
 **Typography:**
-- Display / headings: `Syne` (Google Fonts) — geometric, confident
-- Body: `DM Sans` (Google Fonts) — clean, readable on mobile
-- Monospace (tags/labels): `DM Mono`
+- Display / headings: `Lato` (Google Fonts)
+- Body: `Nunito` (Google Fonts)
+- Monospace (tags, counters): system stack — `SF Mono`, `Fira Code`
 
 ---
 
-## Tailwind Config
+## Tags
+
+All project tags are defined in `src/data/tags.js` as a `TAGS` constant. Projects import from there — no raw strings in `projects.js`.
 
 ```js
-// tailwind.config.js
-export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
-  darkMode: ["class", "[data-theme='dark']"],
-  theme: {
-    extend: {
-      colors: {
-        accent: "var(--accent)",
-        "accent-hover": "var(--accent-hover)",
-        "accent-muted": "var(--accent-muted)",
-        bg: "var(--bg)",
-        "bg-subtle": "var(--bg-subtle)",
-        surface: "var(--surface)",
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
-        border: "var(--border)",
-      },
-      fontFamily: {
-        display: ["Syne", "sans-serif"],
-        body: ["DM Sans", "sans-serif"],
-        mono: ["DM Mono", "monospace"],
-      },
-      borderRadius: {
-        card: "var(--radius-card)",
-        pill: "var(--radius-pill)",
-      },
-      boxShadow: {
-        card: "var(--shadow-card)",
-        "card-hover": "var(--shadow-card-hover)",
-      },
-    },
-  },
+export const TAGS = {
+  // AI Tools
+  CLAUDE:        "Claude",
+  CHATGPT:       "ChatGPT",
+  FIREWORKS_AI:  "Fireworks AI",
+  LOVABLE:       "Lovable",
+
+  // Engineering
+  REACT:         "React",
+  HTML_CSS:      "HTML/CSS",
+  JAVASCRIPT:    "JavaScript",
+  PYTHON:        "Python",
+  SQL:           "SQL",
+
+  // PM & Strategy
+  GTM:           "GTM",
+  PRODUCT_DESIGN: "Product Design",
+
+  // Design
+  FIGMA:         "Figma",
 }
 ```
 
 ---
 
-## Data Schemas
+## Data Schema
 
 ### `src/data/projects.js`
 
-```js
-export const projects = [
-  {
-    id: "project-slug",
-    title: "Project Title",
-    tagline: "One sentence outcome or hook — quantified if possible.",
-    description: "2-3 sentence summary for card body.",
-    tags: ["React", "Vite", "Fuse.js"],
-    image: "/images/project-cover.jpg",   // in public/images/
-    link: "/projects/project-slug",        // internal route, or
-    externalLink: "https://...",           // live demo URL
-    featured: true,                        // shows in homepage section
-    type: "engineering" | "pm" | "design", // optional filter
-  },
-]
-```
-
-### `src/data/experience.js`
+Array ordered by `sortDate` descending. Always add new entries to the top (below the pinned `applied-materials` entry).
 
 ```js
-export const workExperience = [
-  {
-    id: "job-slug",
-    role: "Job Title",
-    company: "Company Name",
-    location: "City, ST",
-    period: "Month Year – Present",
-    bullets: [
-      "One line of impact, quantified.",
-    ],
-  },
-]
+{
+  id: "project-slug",             // used for hash deep-linking: #project=slug
+  title: "Project Title",
+  tagline: "One-line outcome.",
+  description: "2-3 sentence card summary.",
+  tags: [TAGS.REACT, TAGS.CLAUDE],
+  image: `${base}images/project/cover.png`,
+  featured: true,                 // shows in card grid; false = list row
+  hidden: false,                  // true = excluded from all rendering
+  type: "pm" | "engineering" | "design",
+  sortDate: "2026-05",            // YYYY-MM, controls order
 
-export const education = [
-  {
-    id: "school-slug",
-    degree: "Degree Name",
-    school: "School Name",
-    period: "Year – Year",
-    notes: "Optional detail line.",
-  },
-]
+  // Modal fields
+  role: "Role title",
+  context: "Company or event",
+  period: "Month Year",
+  team: "Solo | Team description",
+  problem: "...",
+  solution: "..." | ["bullet", "  sub-bullet"],  // array = rendered as bullets
+  results: ["string", { text: "link text", href: "relative-path" }],
+  keyMetrics: [{ label: "Label", value: "Value" }],  // optional
+
+  // External link button in modal
+  externalLink: "https://..." | `${base}path`,
+  externalLinkLabel: "View Case Study",           // defaults to "View Live"
+}
 ```
 
----
-
-## Component Specs
-
-### `Navbar.jsx`
-
-**Desktop:** Fixed top. Logo left (`AG` initials or wordmark). Nav links right: Home · Projects · Resume · Contact. Accent-colored active indicator underline.
-
-**Mobile:** Fixed bottom bar (thumb-friendly). Icon + label for: Home, Projects, Resume, Contact. Height `56px`. Blurred background (`backdrop-filter: blur`).
-
-**Behavior:**
-- Hides on scroll down, reveals on scroll up (replaces Headroom.js — implement with `useEffect` + scroll listener or Framer Motion's `useScroll`)
-- Background transitions from transparent → solid on scroll past hero
+`solution` as an array: items starting with two spaces (`"  "`) render as sub-bullets with a `◦` marker. Top-level items use `•`.
 
 ---
 
-### `Hero.jsx`
+## Key Components
 
-**Layout:** Full viewport height (`100svh`). Vertically centered. Name as large display heading. Cycling animated subtitle (3 roles, same logic as v1 but using Framer Motion `AnimatePresence`).
+### `ProjectModal.jsx`
 
-**Elements:**
-- Name `h1` — large, font-display
-- Animated cycling role — accent color
-- 1-line bio tagline — text-secondary
-- Two CTA buttons: Download Resume (outlined) + Email Me (filled accent)
-- Scroll indicator arrow at bottom
-
-**Animation:** Staggered entrance — name fades up first, subtitle second, bio third, CTAs last. Delay each by `0.15s`.
-
----
+Full-screen modal triggered by clicking a project card or list row. Sections rendered:
+- Cover image (clickable if `externalLink` exists)
+- Title, tagline, tags
+- Metadata grid: Role / Context / Period / Team
+- Key metrics (optional 2-column stat grid)
+- Problem (paragraph)
+- Solution (paragraph or bullet/sub-bullet list)
+- Results (bullet list; items can be plain strings or `{ text, href }` links)
+- External link button
 
 ### `Projects.jsx`
 
-**Layout:** Vertical stack of `ProjectCard` components. Max 3 cards on the one-pager (featured only). "View All" link at bottom if a `/projects` route exists.
-
-**No carousel on mobile.** Vertical scroll only.
-
----
-
-### `ProjectCard.jsx`
-
-**Structure:**
-```
-┌────────────────────────────────────┐
-│  [Cover Image - 16:9 ratio]        │
-├────────────────────────────────────┤
-│  Title                   [↗ link]  │
-│  Tagline (1 line, accent weight)   │
-│  Description (2-3 lines)           │
-│  [Tag] [Tag] [Tag]                 │
-└────────────────────────────────────┘
-```
-
-**Behavior:**
-- Hover: card lifts (`translateY(-6px)`), shadow deepens, image scales `1.03`
-- Left border `3px` accent color on hover (or always-on for featured)
-- Tags use `Tag.jsx` — `font-mono`, small, accent-muted background
-
-**Mobile:** Full width. Image `200px` height. Tap state matches hover state.
-
----
-
-### `Experience.jsx`
-
-**Layout:** Two columns on desktop (Work left, Education right). Single column stack on mobile.
-
-**Each entry (`TimelineItem.jsx`):**
-```
-[Year pill] ─ Role at Company
-              Location · Period
-              • Bullet of impact
-```
-
-Year pill: rounded, accent background, white text. Vertical line connecting entries uses `::before` pseudo-element on the wrapper, accent color, `2px` wide.
-
----
-
-### `Skills.jsx`
-
-**Layout:** Two-column card on desktop. Full-width stacked on mobile.
+Manages `selectedProject` state. On mount, reads `window.location.hash` — if it matches `#project=<id>`, opens that project's modal. Used by case study back buttons to return to a specific open modal.
 
 ```
-┌──────────────────┬───────────────────┐
-│  I think in...   │  I build with...  │
-│  Product strategy│  React / Vite     │
-│  GTM             │  Python / SQL     │
-│  User research   │  HTML / CSS / JS  │
-│  Data modeling   │  Figma            │
-└──────────────────┴───────────────────┘
+/portfolio/#project=hiring-assessment-startup  →  opens hiring assessment modal
 ```
 
-Items render as a simple list with a small accent dot. No skill bars — they're meaningless.
+### `Navbar.jsx`
 
----
-
-### `Contact.jsx`
-
-**Layout:** Centered. Minimal. 
-
-- Section heading
-- One-line copy
-- Email as large clickable link (accent color)
-- LinkedIn icon link
-- That's it. No form.
-
----
+Sticky top. Theme toggle (sun/moon). Smooth-scroll anchor links.
 
 ### `AnimatedText.jsx`
 
-Reusable cycling text component. Props:
-
-```jsx
-<AnimatedText
-  items={["Product", "Operations", "Design"]}
-  interval={2000}
-/>
-```
-
-Uses Framer Motion `AnimatePresence` with `mode="wait"`. Each item animates: slide up in, slide up out.
+Cycling text via Framer Motion `AnimatePresence`. Used in Hero for role titles.
 
 ---
 
-### `useScrollReveal.js`
+## Case Studies
 
-```js
-// Returns a ref and a boolean `isVisible`
-// Uses IntersectionObserver
-// Triggers once when element enters viewport
-// Used to apply Framer Motion initial/animate variants
-export function useScrollReveal(options = { threshold: 0.15 }) { ... }
-```
+Standalone HTML files in `public/`. No React build step — served directly by GitHub Pages.
 
-Standard reveal variant to use across all sections:
-```js
-export const revealVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-}
-```
+| File | Linked from |
+|---|---|
+| `colare-case-study.html` | Hiring Assessment modal `externalLink` |
+
+Case study HTML files replicate portfolio design tokens (CSS variables inline). Back button links to `/portfolio/#project=<id>` to reopen the source modal. Navigation: keyboard arrows + dot progress + prev/next buttons. Slides wrap on both ends.
 
 ---
 
 ## Routing
 
-**Option A — True one-pager (simpler):**
-No React Router. All sections on `index.html`. Nav links are anchor scroll (`#projects`, `#experience`, etc.) with smooth scroll behavior via CSS `scroll-behavior: smooth`.
+No React Router. Single-page app with anchor scroll. Project detail pages are standalone HTML in `public/` — no framework overhead.
 
-**Option B — One-pager + project detail pages:**
-```
-/                    ← one-pager (Hero + Projects + Experience + Skills + Contact)
-/projects/:slug      ← individual project case study page
-```
-
-Use `HashRouter` for GitHub Pages compatibility (avoids 404 on direct URL access).
-
----
-
-## Animation Checklist
-
-| Element | Animation |
-|---|---|
-| Hero name | Fade up on load |
-| Hero subtitle cycle | Framer Motion AnimatePresence slide |
-| Hero CTAs | Staggered fade up |
-| Section headings | Scroll reveal fade up |
-| Project cards | Scroll reveal stagger (each card 0.1s delay) |
-| Card hover | translateY + shadow + image scale |
-| Timeline items | Scroll reveal stagger left |
-| Navbar hide/show | Framer Motion y transform |
-| Page load | No flash — use `opacity: 0` on body, remove after JS loads |
-
----
-
-## Mobile Breakpoints
-
-| Breakpoint | Behavior |
-|---|---|
-| `< 640px` | Single column. Bottom nav bar. Cards full width. |
-| `640px – 1024px` | Single column. Top nav. Cards full width. |
-| `> 1024px` | Desktop layout. Experience two columns. |
+Modal deep-linking via URL hash: `#project=<id>`. `Projects.jsx` reads this on mount.
 
 ---
 
 ## Dark Mode
 
-Toggle stored in `localStorage`. Applied as `data-theme="dark"` on `<html>`. Default: system preference via `prefers-color-scheme`. Toggle button in navbar (sun/moon icon, no label).
+Toggle in navbar. Stored in `localStorage`. Applied as `data-theme="dark"` on `<html>`. Default: system `prefers-color-scheme`.
 
 ---
 
-## Performance Notes
+## `vite.config.js`
 
-- All images in `public/images/` — use `loading="lazy"` on project covers
-- Fonts loaded via `<link rel="preconnect">` + Google Fonts in `index.html`
-- Framer Motion: import only what's used (`motion`, `AnimatePresence`) — avoid importing entire library
-- No jQuery. No Owl Carousel. No Headroom.js. No Bootstrap.
-
----
-
-## `index.html` Head
-
-```html
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="[Name] — Product Manager & Frontend Developer" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <title>[Name] — Portfolio</title>
-</head>
+```js
+export default defineConfig({
+  plugins: [react()],
+  base: "/portfolio/",
+})
 ```
 
 ---
@@ -432,29 +267,13 @@ Toggle stored in `localStorage`. Applied as `data-theme="dark"` on `<html>`. Def
 
 ---
 
-## `vite.config.js`
+## Intentionally Excluded
 
-```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  base: "/portfolio-v2/",   // match GitHub repo name
-})
-```
-
----
-
-## What's Intentionally Excluded
-
-- No contact form (no backend)
+- No React Router (case studies are static HTML, not routes)
+- No contact form
 - No blog
-- No analytics setup (add later)
-- No CMS integration
-- No image optimization pipeline (add later)
-- No i18n
-- No testing setup
-- No CI/CD beyond `gh-pages` deploy script
+- No analytics
+- No CMS
 - No skill bars or percentage meters
-- No testimonials section
+- No testimonials
+- No CI/CD beyond `gh-pages` deploy

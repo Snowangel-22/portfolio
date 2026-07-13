@@ -270,9 +270,25 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                   <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px' }}>
                     Solution
                   </h3>
-                  <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
-                    {project.solution}
-                  </p>
+                  {Array.isArray(project.solution) ? (
+                    <ul style={{ margin: 0, paddingLeft: 0, listStyle: 'none' }}>
+                      {project.solution.map((item, idx) => {
+                        const isSub = item.startsWith('  ')
+                        return (
+                          <li key={idx} style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 6, position: 'relative', paddingLeft: isSub ? 28 : 12 }}>
+                            <span style={{ position: 'absolute', left: isSub ? 16 : 0, color: isSub ? 'var(--text-tertiary)' : 'var(--accent)', fontWeight: 600 }}>
+                              {isSub ? '◦' : '•'}
+                            </span>
+                            {item.trim()}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  ) : (
+                    <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+                      {project.solution}
+                    </p>
+                  )}
                 </div>
 
                 {/* Results */}
@@ -344,7 +360,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                       onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
                       onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}
                     >
-                      View Live
+                      {project.externalLinkLabel || 'View Live'}
                       <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>

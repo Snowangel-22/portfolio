@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useScrollReveal, revealVariants } from '../../hooks/useScrollReveal'
 import { projects } from '../../data/projects'
@@ -16,6 +16,15 @@ const containerVariants = {
 export default function Projects() {
   const { ref, isVisible } = useScrollReveal()
   const [selectedProject, setSelectedProject] = useState(null)
+
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash.startsWith('#project=')) {
+      const id = hash.slice('#project='.length)
+      const project = projects.find(p => p.id === id)
+      if (project) setSelectedProject(project)
+    }
+  }, [])
 
   const visibleProjects = projects.filter(p => !p.hidden)
   const featuredProjects = visibleProjects.filter(p => p.featured)
