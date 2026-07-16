@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berkeley M.E.T. Alumni Association — Action Plan</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --blue:#003262; --gold:#FDB515; --blue-light:#dce8f5; --gold-light:#fff0c0; font-family:system-ui,-apple-system,sans-serif; }
+
+body { background:#e8edf4; display:flex; justify-content:center; padding:28px 16px; min-height:100vh; }
+.deck-wrap { width:100%; max-width:900px; display:flex; flex-direction:column; }
+.deck-label { font-size:10px; font-weight:700; color:var(--blue); letter-spacing:1.2px; text-transform:uppercase; opacity:0.45; text-align:center; margin-bottom:12px; }
+
+.slides-wrap { border-radius:10px; overflow:hidden; border:0.5px solid #c8d8ea; box-shadow:0 6px 32px rgba(0,50,98,0.13); width:100%; }
+.slides-viewport { overflow:hidden; width:100%; }
+.slides-track { display:flex; transition:transform 0.32s cubic-bezier(.4,0,.2,1); }
+.slide { min-width:100%; width:100%; background:#fff; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+
+/* NAV */
+.nav { display:flex; align-items:center; justify-content:space-between; padding:12px 0 4px; gap:8px; width:100%; }
+.dots { display:flex; gap:6px; flex:1; justify-content:center; flex-wrap:wrap; }
+.dot { width:7px; height:7px; border-radius:50%; background:#ccc; border:none; cursor:pointer; padding:0; flex-shrink:0; }
+.dot.on { background:var(--blue); }
+.nbtn { background:#fff; border:1px solid #ccc; border-radius:8px; padding:7px 18px; font-size:12px; cursor:pointer; color:#111; font-family:inherit; flex-shrink:0; }
+.nbtn:hover { background:#f0f0f0; }
+
+/* FOOTER BAR */
+.sfbar { position:absolute; bottom:0; left:0; right:0; display:flex; height:4px; }
+.sfb-b { background:var(--blue); flex:5; }
+.sfb-g { background:var(--gold); flex:1; }
+.pg { font-size:10px; position:absolute; bottom:10px; right:14px; }
+.pg-light { color:rgba(255,255,255,0.4); }
+.pg-dark { color:#bbb; }
+
+/* BLUE COVER */
+.s-blue { background:var(--blue); padding:5% 7%; flex:1; display:flex; flex-direction:column; justify-content:center; }
+.eyebrow { font-size:clamp(9px,1.1vw,12px); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:2%; }
+.s-blue h1 { font-size:clamp(20px,3vw,34px); font-weight:700; color:#fff; line-height:1.15; }
+.gold-bar { width:44px; height:3px; background:var(--gold); border-radius:2px; margin:2.5% 0; }
+.s-blue .desc { font-size:clamp(11px,1.3vw,14px); color:rgba(255,255,255,0.88); line-height:1.6; max-width:62%; }
+.s-blue .meta { display:flex; gap:6%; margin-top:4%; }
+.s-blue .meta-item strong { display:block; font-size:clamp(11px,1.3vw,14px); color:#fff; font-weight:600; }
+.s-blue .meta-item span { font-size:clamp(9px,1vw,11px); color:rgba(255,255,255,0.5); }
+
+/* WHITE SLIDE */
+.s-white { padding:3.5% 5.5%; flex:1; display:flex; flex-direction:column; }
+.s-tag { font-size:clamp(8px,0.85vw,10px); letter-spacing:1.5px; text-transform:uppercase; font-weight:700; color:#7a5000; background:var(--gold-light); display:inline-block; padding:2px 9px; border-radius:20px; margin-bottom:1.5%; border:1px solid #e6c200; align-self:flex-start; }
+.s-title { font-size:clamp(15px,2vw,24px); font-weight:700; color:var(--blue); line-height:1.2; margin-bottom:0.5%; }
+.gold-rule { width:32px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:2%; }
+.s-body { flex:1; display:flex; flex-direction:column; gap:1.5%; }
+
+/* JOURNEY CARDS */
+.journey-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2%; flex:1; }
+.journey-card { border-radius:10px; overflow:hidden; display:flex; flex-direction:column; border:1px solid #c0d4ea; }
+.journey-card.featured { border:2px solid var(--gold); }
+.jcard-head { padding:4% 5%; display:flex; align-items:center; gap:8px; background:var(--blue); }
+.jcard-icon { width:clamp(24px,3vw,36px); height:clamp(24px,3vw,36px); border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.jcard-icon i { font-size:clamp(12px,1.5vw,16px); color:#3a2000; }
+.jcard-title { font-size:clamp(12px,1.5vw,16px); font-weight:700; color:#fff; }
+.jcard-sub { font-size:clamp(9px,0.95vw,11px); color:rgba(255,255,255,0.6); margin-top:2px; }
+.jcard-body { flex:1; padding:4% 5%; background:#fff; display:flex; flex-direction:column; gap:7px; }
+.jbullet { display:flex; gap:7px; align-items:flex-start; font-size:clamp(10px,1.05vw,12px); color:#111; line-height:1.5; }
+.jbullet::before { content:''; display:block; width:5px; height:5px; border-radius:50%; background:var(--gold); border:1.5px solid #b8860b; margin-top:5px; flex-shrink:0; }
+
+/* STEP SLIDE */
+.s-step { flex:1; display:flex; flex-direction:column; }
+.step-hdr { background:var(--blue); padding:3% 5%; display:flex; align-items:center; gap:3%; flex-shrink:0; }
+.step-circle { width:clamp(30px,3.8vw,44px); height:clamp(30px,3.8vw,44px); border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:clamp(14px,1.9vw,20px); font-weight:700; color:#3a2000; flex-shrink:0; }
+.step-eyebrow { font-size:clamp(8px,0.85vw,10px); letter-spacing:1.3px; text-transform:uppercase; color:rgba(255,255,255,0.5); font-weight:700; margin-bottom:3px; }
+.step-hdr h2 { font-size:clamp(13px,1.8vw,20px); font-weight:700; color:#fff; line-height:1.2; }
+.step-cols { flex:1; display:grid; grid-template-columns:1fr 1fr; }
+.col-left { padding:3% 3% 3% 5.5%; border-right:1px solid #e8eef5; display:flex; flex-direction:column; gap:2%; }
+.col-right { padding:3% 5.5% 3% 3%; display:flex; flex-direction:column; gap:2%; }
+.col-label { font-size:clamp(8px,0.85vw,10px); font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--blue); opacity:0.7; margin-bottom:1%; }
+
+/* TEXT ROW LISTS — no tables, no html bullets */
+.row-list { display:flex; flex-direction:column; flex:1; }
+.row-item { display:flex; gap:0; padding:2% 0; border-bottom:1px solid #eef2f7; align-items:flex-start; }
+.row-item:last-child { border-bottom:none; }
+.row-num { width:clamp(16px,2vw,20px); height:clamp(16px,2vw,20px); border-radius:50%; background:var(--gold-light); border:1.5px solid #e6c200; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; font-size:clamp(8px,0.9vw,10px); font-weight:700; color:#7a5000; }
+.row-key { font-size:clamp(9px,0.95vw,11px); font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.4px; min-width:26%; flex-shrink:0; padding-right:3%; line-height:1.5; }
+.row-val { font-size:clamp(10px,1.05vw,12px); color:#111; line-height:1.55; padding-left:8px; }
+
+/* IMPORTANCE BULLETS */
+.imp-list { display:flex; flex-direction:column; flex:1; gap:2%; }
+.imp-item { font-size:clamp(10px,1.1vw,12px); color:#111; line-height:1.6; padding-left:10px; border-left:2px solid var(--gold); }
+
+/* PROPOSAL BOX */
+.proposal-box { background:var(--blue-light); border:1px solid #b8cfea; border-radius:8px; padding:3% 4%; margin-top:auto; }
+.proposal-label { font-size:clamp(8px,0.85vw,10px); font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--blue); margin-bottom:6px; }
+.proposal-item { font-size:clamp(10px,1.05vw,12px); color:#002147; line-height:1.5; margin-bottom:4px; font-weight:600; }
+.proposal-sub { font-size:clamp(9.5px,1vw,11px); color:#223; line-height:1.5; padding-left:14px; margin-bottom:2px; }
+
+/* DECISION / NEXT STEPS ITEMS */
+.dec-item { display:flex; gap:3%; align-items:flex-start; padding:2% 3%; border-radius:8px; background:var(--blue-light); border:1px solid #b8cfea; }
+.dec-num { width:clamp(20px,2.5vw,28px); height:clamp(20px,2.5vw,28px); border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; font-size:clamp(10px,1.2vw,13px); font-weight:700; color:var(--gold); flex-shrink:0; margin-top:1px; }
+.dec-text h4 { font-size:clamp(11px,1.2vw,13px); font-weight:700; color:#002147; margin-bottom:2px; }
+.dec-text p { font-size:clamp(10px,1vw,11.5px); color:#334; line-height:1.45; }
+
+/* CURRENT STATE */
+.mini-bar { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5%; margin-bottom:1.5%; flex-shrink:0; }
+.mini-pill { background:var(--blue); border-radius:6px; padding:1.5% 3%; display:flex; align-items:center; gap:6px; }
+.mini-pill.feat { border:2px solid var(--gold); }
+.mini-pill i { color:var(--gold); font-size:clamp(11px,1.3vw,14px); }
+.mini-pill span { font-size:clamp(10px,1.1vw,12px); font-weight:700; color:#fff; }
+
+.diag-grid { flex:1; display:grid; grid-template-columns:13% 1fr 1fr 1fr; grid-template-rows:auto 1fr 1fr 1fr; }
+.dg-head { background:var(--blue-light); border:1px solid #c8d8ea; padding:1.8% 2%; font-size:clamp(9px,1vw,11px); font-weight:700; color:var(--blue); display:flex; align-items:center; gap:5px; }
+.dg-head.empty { background:#f0f4f8; }
+.dg-row-label { border:1px solid #d0dcea; padding:1.8% 2%; font-size:clamp(8px,0.85vw,10px); font-weight:700; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; }
+.dg-row-label.exists { color:#444; background:#f8f9fb; }
+.dg-row-label.works { color:#27500a; background:#f0f8e8; }
+.dg-row-label.gaps { color:#7a5000; background:#fff8e0; }
+.dg-cell { border:1px solid #d0dcea; padding:1.8% 2%; font-size:clamp(9px,0.95vw,11px); line-height:1.4; vertical-align:top; display:flex; align-items:flex-start; }
+.dg-cell.exists { color:#111; background:#fff; }
+.dg-cell.works { color:#1e3d08; background:#f0f8e8; }
+.dg-cell.gaps { color:#5a3a00; background:#fff8e0; }
+
+/* ── MOBILE ── */
+@media (max-width: 700px) {
+  body { padding: 12px 8px; }
+  .deck-label { font-size: 9px; margin-bottom: 8px; }
+  .slides-wrap { border-radius: 8px; }
+
+  .s-blue, .s-white, .s-step { padding: 20px 18px 28px; }
+  .s-blue h1 { font-size: 24px; }
+  .s-blue .desc { max-width: 100%; font-size: 13px; }
+  .s-blue .meta { flex-direction: column; gap: 12px; margin-top: 20px; }
+  .s-title { font-size: 18px; }
+  .s-sub { font-size: 12px; }
+
+  /* stack journey cards */
+  .journey-grid { display: flex; flex-direction: column; gap: 12px; }
+  .journey-card { min-height: 0; }
+  .jcard-body { gap: 10px; padding: 14px 16px; }
+  .jbullet span, .jbullet { font-size: 13px; }
+
+  /* stack step columns */
+  .step-hdr { padding: 16px 18px; gap: 12px; }
+  .step-circle { width: 38px; height: 38px; font-size: 17px; }
+  .step-hdr h2 { font-size: 16px; }
+  .step-cols { display: flex; flex-direction: column; }
+  .col-left { border-right: none; border-bottom: 1px solid #e8eef5; padding: 18px; }
+  .col-right { padding: 18px; }
+  .imp-item, .row-val, .proposal-item, .proposal-sub { font-size: 13px !important; }
+  .row-key { min-width: 90px; font-size: 11px !important; }
+
+  /* current-state table: horizontal scroll instead of squeeze */
+  .mini-bar { grid-template-columns: 1fr; gap: 6px; }
+  .mini-pill { padding: 8px 12px; }
+  .diag-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -18px; padding: 0 18px; }
+  .diag-grid { min-width: 640px; }
+  .dg-head, .dg-row-label, .dg-cell { font-size: 12px !important; padding: 10px 10px; }
+
+  /* decision / next-step cards */
+  .dec-item { padding: 12px 14px; }
+  .dec-text h4 { font-size: 13px; }
+  .dec-text p { font-size: 12px; }
+
+  .nav { padding: 10px 4px 2px; }
+  .nbtn { padding: 8px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="deck-wrap">
+<div class="deck-label">Berkeley M.E.T. Alumni Association · Action Plan</div>
+
+<div class="slides-wrap">
+<div class="slides-viewport">
+<div class="slides-track" id="track">
+
+<!-- 8: NEXT STEPS -->
+<div class="slide">
+  <div class="s-white">
+    <span class="s-tag">Where I'm focused</span>
+    <div class="s-title">What I'd like to work on next</div>
+    <div class="gold-rule"></div>
+    <div class="s-body">
+      <div class="dec-item"><div class="dec-num">1</div><div class="dec-text"><h4>Survey</h4><p>Consolidate any official contact list and send out surveys to see the tools and channels people are using today — to determine what to use going forward. This will help decide the next few items.</p></div></div>
+      <div class="dec-item"><div class="dec-num">2</div><div class="dec-text"><h4>Existing channels: email, Slack, Instagram, Messenger</h4><p>Decide what to keep and what to change</p></div></div>
+      <div class="dec-item"><div class="dec-num">3</div><div class="dec-text"><h4>Website</h4><p>Revisit what purpose the website should serve — does it need authentication? Should it link to other communication channels? What content can and can't be posted?</p></div></div>
+      <div class="dec-item"><div class="dec-num">4</div><div class="dec-text"><h4>In-person planning</h4><p>I'm currently located in South Bay and would love to help with logistics for any events in the area</p></div></div>
+    </div>
+  </div>
+  <span class="pg pg-dark">1 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 1: COVER -->
+<div class="slide">
+  <div class="s-blue">
+    <div class="eyebrow">Berkeley M.E.T. Alumni Association</div>
+    <h1>Alumni Network<br>Buildout Plan</h1>
+    <div class="gold-bar"></div>
+    <p class="desc">Strategy and proposed execution steps to achieve an engaging alumni association from graduation onward.</p>
+    <div class="meta">
+      <div class="meta-item"><strong>July 2026</strong><span>Working Draft</span></div>
+      <div class="meta-item"><strong>~300 Alumni</strong><span>Classes of 2021 – 2026</span></div>
+    </div>
+  </div>
+  <span class="pg pg-light">2 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 2: WHAT ALUMNI WANT -->
+<div class="slide">
+  <div class="s-white">
+    <span class="s-tag">Why it matters</span>
+    <div class="s-title">What alumni actually want</div>
+    <div class="gold-rule"></div>
+    <div class="s-body">
+      <div class="journey-grid">
+        <div class="journey-card">
+          <div class="jcard-head"><div class="jcard-icon"><i class="ti ti-news" aria-hidden="true"></i></div><div><div class="jcard-title">Be Informed</div><div class="jcard-sub">Stay connected passively</div></div></div>
+          <div class="jcard-body">
+            <div class="jbullet">Newsletter with alumni news and community updates</div>
+            <div class="jbullet">What classmates are building and working on</div>
+            <div class="jbullet">Upcoming events and M.E.T. program news</div>
+          </div>
+        </div>
+        <div class="journey-card featured">
+          <div class="jcard-head"><div class="jcard-icon"><i class="ti ti-users" aria-hidden="true"></i></div><div><div class="jcard-title">Participate</div><div class="jcard-sub">Show up and engage</div></div></div>
+          <div class="jcard-body">
+            <div class="jbullet">Attend the annual reunion or networking event</div>
+            <div class="jbullet">Join career panels, webinars, and mixers</div>
+            <div class="jbullet">Share job openings and referrals in the community</div>
+          </div>
+        </div>
+        <div class="journey-card">
+          <div class="jcard-head"><div class="jcard-icon"><i class="ti ti-heart-handshake" aria-hidden="true"></i></div><div><div class="jcard-title">Give Back</div><div class="jcard-sub">Become a multiplier</div></div></div>
+          <div class="jcard-body">
+            <div class="jbullet">Mentor a current M.E.T. student or new grad</div>
+            <div class="jbullet">Speak at an event or career panel</div>
+            <div class="jbullet">Hire or refer M.E.T. graduates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">3 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 3: CURRENT STATE -->
+<div class="slide">
+  <div class="s-white">
+    <span class="s-tag">Where we are</span>
+    <div class="s-title">Current state of the association</div>
+    <div class="gold-rule"></div>
+    <div class="s-body">
+      <div class="mini-bar">
+        <div class="mini-pill"><i class="ti ti-news" aria-hidden="true"></i><span>Be Informed</span></div>
+        <div class="mini-pill feat"><i class="ti ti-users" aria-hidden="true"></i><span>Participate</span></div>
+        <div class="mini-pill"><i class="ti ti-heart-handshake" aria-hidden="true"></i><span>Give Back</span></div>
+      </div>
+      <div class="diag-grid-wrap">
+      <div class="diag-grid">
+        <div class="dg-head empty"></div>
+        <div class="dg-head"><i class="ti ti-news" aria-hidden="true"></i> Be Informed</div>
+        <div class="dg-head"><i class="ti ti-users" aria-hidden="true"></i> Participate</div>
+        <div class="dg-head"><i class="ti ti-heart-handshake" aria-hidden="true"></i> Give Back</div>
+
+        <div class="dg-row-label exists">What exists</div>
+        <div class="dg-cell exists">Alumni Slack (low activity, 128 members), cohort chats (inactive), forum (in progress)</div>
+        <div class="dg-cell exists">1–2 informal gatherings + 1 organized event per year</div>
+        <div class="dg-cell exists">Ad hoc sponsorships</div>
+
+        <div class="dg-row-label works">What works</div>
+        <div class="dg-cell works">M.E.T. alumni community is generally warm</div>
+        <div class="dg-cell works">Events draw attendance</div>
+        <div class="dg-cell works">Alumni help each other when asked directly</div>
+
+        <div class="dg-row-label gaps">Gaps</div>
+        <div class="dg-cell gaps">No consistent channel — no clear way to join or know if you're in the loop</div>
+        <div class="dg-cell gaps">No contact database, no onboarding process for new grads</div>
+        <div class="dg-cell gaps">No easy path to get involved, no central contacts</div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">4 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 4: STEP 1 -->
+<div class="slide">
+  <div class="s-step">
+    <div class="step-hdr">
+      <div class="step-circle">1</div>
+      <div><div class="step-eyebrow">Step 1 of 5 · Foundation</div><h2>Build one shared contact database</h2></div>
+    </div>
+    <div class="step-cols">
+      <div class="col-left">
+        <div class="col-label">Importance</div>
+        <div class="imp-list">
+          <div class="imp-item">Contact data is scattered across organizers' personal circles and events are shared "word of mouth"</div>
+          <div class="imp-item">A shared database helps with outreach, events, and onboarding</div>
+          <div class="imp-item">Enables consistent, coordinated communication across all ~300 alumni</div>
+          <div class="imp-item">Better tracks feedback across events to improve them over time</div>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="col-label">Proposed Tasks</div>
+        <div class="row-list">
+          <div class="row-item"><div class="row-num">1</div><div class="row-val">Collect alumni contacts: name, cohort year, email, LinkedIn URL, phone (?)</div></div>
+          <div class="row-item"><div class="row-num">2</div><div class="row-val">Merge into one shared Google Sheet, accessible to all leads</div></div>
+          <div class="row-item"><div class="row-num">3</div><div class="row-val">Use M.E.T. LinkedIn alumni group and cohort Slack lists to recover missing contacts</div></div>
+          <div class="row-item"><div class="row-num">4</div><div class="row-val">One person maintains and updates the list going forward</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">5 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 5: STEP 2 -->
+<div class="slide">
+  <div class="s-step">
+    <div class="step-hdr">
+      <div class="step-circle">2</div>
+      <div><div class="step-eyebrow">Step 2 of 5 · Communication</div><h2>Find working communication channels</h2></div>
+    </div>
+    <div class="step-cols">
+      <div class="col-left">
+        <div class="col-label">Importance</div>
+        <div class="imp-list" style="flex:0; margin-bottom:2%;">
+          <div class="imp-item">Alumni Slack is dormant, cohort chats are dead, forum hasn't been built</div>
+        </div>
+        <div class="proposal-box" style="margin-top:0;">
+          <div class="proposal-label">Proposal — 2 main types of channels</div>
+          <div class="proposal-item">Centralized landing page</div>
+          <div class="proposal-sub">Website, socials</div>
+          <div class="proposal-item" style="margin-top:8px;">Personalized notifications</div>
+          <div class="proposal-sub">Based on preference — text, Slack, Messenger, Partiful</div>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="col-label">Proposed Tasks</div>
+        <div class="row-list">
+          <div class="row-item"><div class="row-num">1</div><div class="row-val">Establish a regular cadence for overall alumni communication (quarterly, semiannual)</div></div>
+          <div class="row-item"><div class="row-num">2</div><div class="row-val">User research → decide and establish channels to use (Messenger, text, Discord, Slack)</div></div>
+          <div class="row-item"><div class="row-num">3</div><div class="row-val">Brainstorm ways to engage in-person vs. virtually (regional hubs?)</div></div>
+          <div class="row-item"><div class="row-num">4</div><div class="row-val">Determine the website's purpose</div></div>
+          <div class="row-item"><div class="row-num">5</div><div class="row-val">Build out the channels</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">6 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 6: STEP 3 -->
+<div class="slide">
+  <div class="s-step">
+    <div class="step-hdr">
+      <div class="step-circle">3</div>
+      <div><div class="step-eyebrow">Step 3 of 5 · Onboarding</div><h2>Create a new grad welcome process</h2></div>
+    </div>
+    <div class="step-cols">
+      <div class="col-left">
+        <div class="col-label">Importance</div>
+        <div class="imp-list">
+          <div class="imp-item">Without a welcome process, each new cohort graduates and drifts — hard to track down after</div>
+          <div class="imp-item">New grads are likely to be the highest-engagement cohort</div>
+          <div class="imp-item">We already have established program events to take advantage of</div>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="col-label">Proposed Tasks</div>
+        <div class="row-list">
+          <div class="row-item"><div class="row-num">1</div><div class="row-val">Continue introductions during commencement</div></div>
+          <div class="row-item"><div class="row-num">2</div><div class="row-val">Continue to offer incentives for joining the alumni association</div></div>
+          <div class="row-item"><div class="row-num">3</div><div class="row-val">Establish a cadence immediately — maybe a welcome event in the fall</div></div>
+          <div class="row-item"><div class="row-num">4</div><div class="row-val">Take advantage of each year's student board for engagement</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">7 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+<!-- 7: STEPS 4+5 COMBINED -->
+<div class="slide">
+  <div class="s-step">
+    <div class="step-hdr">
+      <div class="step-circle">4</div>
+      <div><div class="step-eyebrow">Steps 4 of 4 · Events &amp; Sustainability</div><h2>Establish recurring events and a cadence for the rest</h2></div>
+    </div>
+    <div class="step-cols">
+      <div class="col-left">
+        <div class="col-label">Event Marketing</div>
+        <div class="row-list">
+          <div class="row-item"><div class="row-num">1</div><div class="row-val">Event communication for upcoming events</div></div>
+          <div class="row-item"><div class="row-num">2</div><div class="row-val">Strong preference for in-person events</div></div>
+          <div class="row-item"><div class="row-num">3</div><div class="row-val">Establish a central point of contact who people can direct questions to</div></div>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="col-label">Proposed Annual Calendar</div>
+        <div class="row-list">
+          <div class="row-item"><div class="row-key">May</div><div class="row-val">Welcome new grads — email and channel invite within 30 days of graduation</div></div>
+          <div class="row-item"><div class="row-key">Fall</div><div class="row-val">Large in-person event</div></div>
+          <div class="row-item"><div class="row-key">December</div><div class="row-val">M.E.T. Program Holiday Party</div></div>
+          <div class="row-item"><div class="row-key">Spring</div><div class="row-val">Medium/large in-person event</div></div>
+          <div class="row-item"><div class="row-key">Ongoing</div><div class="row-val">Unofficial events advertised by alumni</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pg pg-dark">8 / 8</span>
+  <div class="sfbar"><div class="sfb-b"></div><div class="sfb-g"></div></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" id="prev">← Prev</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" id="next">Next →</button>
+</div>
+
+</div>
+
+<script>
+const total = 8;
+let cur = 0;
+const track = document.getElementById('track');
+const viewport = document.querySelector('.slides-viewport');
+const allSlides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+
+function isMobile() { return window.innerWidth <= 700; }
+
+function setSize() {
+  if (isMobile()) {
+    track.style.transform = 'none';
+    viewport.style.height = 'auto';
+    allSlides.forEach((s, i) => {
+      s.style.width = '100%';
+      s.style.height = 'auto';
+      s.style.display = i === cur ? 'flex' : 'none';
+    });
+  } else {
+    const w = viewport.offsetWidth;
+    const h = Math.round(w * 9 / 16);
+    viewport.style.height = h + 'px';
+    allSlides.forEach(s => { s.style.width = w + 'px'; s.style.height = h + 'px'; s.style.display = 'flex'; });
+    track.style.transform = 'translateX(-' + (cur * w) + 'px)';
+  }
+}
+
+setSize();
+window.addEventListener('resize', setSize);
+
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.setAttribute('aria-label', 'Slide ' + (i + 1));
+  d.onclick = () => go(i);
+  dotsEl.appendChild(d);
+}
+
+function go(n) {
+  cur = Math.max(0, Math.min(total - 1, n));
+  setSize();
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
+}
+
+document.getElementById('prev').onclick = () => go(cur - 1);
+document.getElementById('next').onclick = () => go(cur + 1);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') go(cur + 1);
+  if (e.key === 'ArrowLeft') go(cur - 1);
+});
+</script>
+</body>
+</html>
