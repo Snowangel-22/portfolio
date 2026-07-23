@@ -46,7 +46,7 @@ export const projects = [
 
   {
     id: "hiring-assessment-startup",
-    title: "Hiring Assessment Startup Case Study",
+    title: "Colare Help Center Audit",
     tagline: "Ops and product: Three-phase audit with Claude across grammar, functionality, and product improvements.",
     description: "Onsite assessment for a hiring tech startup. Inherited a static help center with corrupted content, dead links, and no search. Rebuilt the information architecture and shipped working fixes across the full site.",
     tags: [TAGS.CLAUDE, TAGS.HTML_CSS, TAGS.JAVASCRIPT],
@@ -83,7 +83,7 @@ export const projects = [
 
   {
     id: "fireworks-ai",
-    title: "Fireworks AI Take-Home",
+    title: "Fireworks AI Model Evaluator",
     tagline: "Model selector and evaluator for engineers migrating from closed to open models.",
     description: "A web app that recommends open models for a given prompt, runs them live, and compares latency, cost, and token usage side by side.",
     tags: [TAGS.REACT, TAGS.FIREWORKS_AI, TAGS.PRODUCT_DESIGN, TAGS.CLAUDE],
